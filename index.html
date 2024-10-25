@@ -18,10 +18,20 @@
             align-items: center;
             background-color: #6402AC;
             padding: 10px 20px;
+            .navbar {
+    position: fixed; /* Fixes the navbar to the top */
+    top: 0; /* Aligns it to the top of the page */
+    left: 0;
+    right: 0;
+    background: white; /* Background color */
+    transition: top 0.3s; /* Smooth transition for hiding/showing */
+    z-index: 1000; /* Ensure it stays above other content */
+}
         }
 
         .logo img {
-            height: 70px; /* Adjust logo size */
+            height: 70px;
+            align-items: center; /* Adjust logo size */
         }
 
         .search-container {
@@ -68,14 +78,15 @@
                 align-items: flex-start; /* Align items to the start */
             }
 
-            .logo {
-                margin: 0 auto; /* Center the logo */
-            }
             .search-container {
                 width: 100%; /* Full width for search container */
                 justify-content: space-between; /* Space out search input and button */
-             /* Margin for spacing */
+                /* Margin for spacing */
             }
+            .logo {
+                margin: 0 auto; /* Center the logo */
+            }
+            
 
             .search-bar {
                 width: 100%; /* Full width on mobile */
@@ -90,9 +101,6 @@
                 align-items: center; /* Show on desktop */
             }
         }
-
-
-
 
 
 
@@ -378,22 +386,28 @@ button {
             }
         }
 
+
+
+
+
+        
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar" id="navbar" style="position: fixed; top: 0; left: 0; right: 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); z-index: 1000; transition: top 0.3s;">
         <div class="logo">
-            <img src="20241021_180509.png" alt="Logo">
+            <img src="c:\Users\admin\OneDrive\Desktop\shopit\20241021_180509.png" alt="Logo">
         </div>
         <div class="search-container">
             <input type="search" placeholder="Search..." id="search-bar" class="search-bar">
             <button id="toggle-search" class="toggle-button"><i class="fas fa-search"></i></button>
-            <div class="cart-icon">
-                <i class="fas fa-shopping-cart" alt="Add to Cart"></i>
+            <div class="cart-icon" onclick="viewCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-count">0</span>
             </div>
         </div>
     </nav>
-    <main>
+    <main style="padding-top: 80px; margin-top: 100px; height: 200vh; text-align: center;">
         <div id="product-list"></div>
         <div id="not-found" class="not-found" style="display:none;">No products found.</div>
 
@@ -410,6 +424,25 @@ button {
     </main>
 
     <script>
+
+let lastScrollTop = 0;
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop) {
+        // Scrolling down
+        navbar.style.top = "-60px"; // Adjust this value according to your navbar height
+    } else {
+        // Scrolling up
+        navbar.style.top = "0";
+    }
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+});
+
+
+
         document.getElementById('toggle-search').addEventListener('click', function() {
             const searchBar = document.getElementById('search-bar');
             if (searchBar.style.display === 'none' || searchBar.style.display === '') {

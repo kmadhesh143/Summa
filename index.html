@@ -15,12 +15,16 @@
             background-color: #f4f4f4; /* Light background color for contrast */
         }
         .top-nav {
-            display: flex;
-            align-items: center;
-            padding: 10px 15px;
-            background-color: #844DF3;
-            color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed; /* Fixes the navbar to the top */
+    top: 0; /* Sticks to the top of the viewport */
+    left: 0;
+    width: 100%; /* Full width of the viewport */
+    background-color: #440075; /* Navbar background color */
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    z-index: 1000; 
         }
 
         .top-nav .logo {
@@ -58,7 +62,7 @@
             width: 100%;
             height: 100%;
             padding: 0px;
-            margin: 0px;
+            margin-top: 80px;
             border-radius: 0px;
             
         }
@@ -97,11 +101,145 @@
             color: #220547;
             background-color: rgba(0, 123, 255, 0.1);
         }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            font-size: 2rem;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Container styling */
+        .product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Adjust grid layout for mobile view */
+@media (max-width: 768px) {
+    .product-container {
+        grid-template-columns: repeat(2, 1fr); /* 3 items per row on mobile */
+        gap: 10px; /* Smaller gap for mobile */
+    }
+}
+
+        /* Product card styling */
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: fill;
+            background-color: #f3f3f3;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            font-size: 0.9rem;
+            color: #777;
+            margin: 5px 0 12px;
+            line-height: 1.5;
+        }
+
+        .price-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .discounted-price {
+            color: #f44336;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+
+        .offer-percentage {
+            background: #4CAF50;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .add-to-cart {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 15px;
+            background-color: #220547;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .add-to-cart:hover {
+            background-color: #440075;
+        }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
+    <div class="top-nav" id="top-nav">
         <div class="logo">
             <img src="20241021_180509.png" class="logo">
         </div>
@@ -112,13 +250,22 @@
     </div>
     <img src="20241027_170719.jpg" alt="Banner Image" class="banner">
 
-    <div class="container">
-        <h1>Home Page</h1>
-        <p>Welcome to the home page!</p>
-    </div>
+    <main class="main-content">
+        <!-- Separate divs for each category with unique IDs -->
+        <section>
+            <h2>Hard Toys</h2>
+            <div id="hard-toys" class="product-container"></div>
+        </section>
+        <img src="20241027_170719.jpg" alt="Banner Image" class="banner">
+
+        <section>
+            <h2>Soft Toys</h2>
+            <div id="soft-toys" class="product-container"></div>
+        </section>
+    </main>
     
     <nav class="bottom-nav">
-        <a href="home.html" class="nav-item active">
+        <a href="index.html" class="nav-item active">
             <i class="fas fa-home nav-icon"></i>
             <span>Home</span>
         </a>
@@ -131,5 +278,62 @@
             <span>Cart</span>
         </a>
     </nav>
+    
+    <script>
+        async function fetchProducts(tagId) {
+            const url = `https://script.google.com/macros/s/AKfycbxyBwmjezMdNrluL8q8vlXuuSoalqhMa5errik6Dz0b2-uJyzRhL9alwUk5QQ5DGc2Y1w/exec?tagId=${tagId}`; // Replace with your Apps Script URL
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Network response was not ok");
+
+                const products = await response.json();
+                if (products.error) {
+                    document.getElementById(tagId).innerText = products.error;
+                } else {
+                    displayProducts(products, tagId);
+                }
+            } catch (error) {
+                console.error("Error fetching product data:", error);
+                document.getElementById(tagId).innerText = "Failed to load products.";
+            }
+        }
+
+        function displayProducts(products, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = ''; // Clear existing content
+            
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product-card');
+                const offerPercentage = Math.round(((product.actualPrice - product.discountPrice) / product.actualPrice) * 100);
+                productDiv.innerHTML = `
+                    <div class="offer-percentage">${offerPercentage}% OFF</div>
+                    <img src="${product.imageURL}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">${product.name}</div>
+                        <p class="product-description">${product.description}</p>
+                        <div class="price-info">
+                            <span class="product-price">₹${product.discountPrice}</span>
+                            <span class="discounted-price">₹${product.actualPrice}</span>
+                        </div>
+                        <a href="#" class="add-to-cart" onclick="addToCart('${product.productID}')">Add to Cart</a>
+                    </div>
+                `;
+                container.appendChild(productDiv);
+            });
+        }
+
+        function addToCart(productID) {
+            console.log(`Product ${productID} added to cart`);
+            alert(`Product ${productID} added to cart`);
+        }
+
+        // Fetch products for each category
+        fetchProducts('hard-toys'); // Load hard toys
+        fetchProducts('soft-toys'); // Load soft toys
+        // Add more calls here for additional categories as needed
+    </script>
 </body>
 </html>

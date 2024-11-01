@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
         /* Include the same styles for consistency */
         body {
@@ -12,6 +13,43 @@
             font-family: Arial, sans-serif;
             padding-bottom: 60px; /* Space for the bottom nav */
             background-color: #f4f4f4; /* Light background color for contrast */
+        }
+        .top-nav {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #220547;
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-nav .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            height: 60px;
+            margin-right: 20px;
+        }
+
+        .top-nav .search-bar {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .top-nav input[type="text"] {
+            width: 100%;
+            padding: 8px 40px 8px 10px; /* Space for icon */
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .top-nav .search-bar i {
+            position: absolute;
+            right: 10px;
+            color: #220547;
+            cursor: pointer;
         }
         .container {
             padding: 20px;
@@ -54,6 +92,17 @@
     </style>
 </head>
 <body>
+
+    <div class="top-nav">
+        <div class="logo">
+            <img src="c:\Users\admin\OneDrive\Desktop\shopit\20241021_180509.png" class="logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
     <div class="container">
         <h1>Home Page</h1>
         <p>Welcome to the home page!</p>

@@ -44,15 +44,16 @@
         .top-nav input[type="text"] {
             width: 100%;
             padding: 8px 40px 8px 10px; /* Space for icon */
-            border: none;
-            border-radius: 4px;
+            border: 2px solid #fff;
+            background-color: #440075;
+            border-radius: 14px;
             font-size: 1em;
         }
 
         .top-nav .search-bar i {
             position: absolute;
             right: 10px;
-            color: #220547;
+            color: #fff;
             cursor: pointer;
         }
         .container {
@@ -224,8 +225,9 @@
             display: inline-block;
             padding: 10px 20px;
             margin-top: 15px;
-            background-color: #220547;
-            color: #fff;
+            background-color: #fff;
+            color: #440075;
+            border: 2px solid #220547;
             text-decoration: none;
             border-radius: 8px;
             transition: background-color 0.3s ease;
@@ -234,7 +236,61 @@
 
         .add-to-cart:hover {
             background-color: #440075;
+            color: #fff;
         }
+        .loader {
+            display: flex;
+            justify-content: center; /* Center dots horizontally */
+            align-items: center;
+            
+            height: 50px;
+        }
+
+        .loader1 {
+            display: flex;
+            justify-content: center; /* Center dots horizontally */
+            align-items: center;
+            
+            height: 50px;
+        }
+        /* Dot styles */
+        .dot {
+            width: 15px; /* Dot size */
+            height: 15px;
+            border-radius: 50%;
+            background-color: #220547; /* Dot color */
+            animation: bounce 0.6s infinite alternate;
+        }
+
+        /* Delay for each dot */
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+            margin: 10px;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+            margin: 10px;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+            margin: 10px;
+        }
+
+        /* Bounce animation */
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-15px); /* Bounce height */
+            }
+          
+
+       
+        }
+
     </style>
 </head>
 <body>
@@ -248,20 +304,31 @@
             <i class="fas fa-search"></i>
         </div>
     </div>
-    <img src="20241027_170719.jpg" alt="Banner Image" class="banner">
+    <img src="20241101_173943.jpg" alt="Banner Image" class="banner">
 
     <main class="main-content">
         <!-- Separate divs for each category with unique IDs -->
         <section>
             <h2>Hard Toys</h2>
+            <div class="loader">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
             <div id="hard-toys" class="product-container"></div>
         </section>
         <img src="20241027_170719.jpg" alt="Banner Image" class="banner">
 
         <section>
             <h2>Soft Toys</h2>
+            <div class="loader1">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
             <div id="soft-toys" class="product-container"></div>
         </section>
+        
     </main>
     
     <nav class="bottom-nav">
@@ -281,9 +348,11 @@
     
     <script>
         async function fetchProducts(tagId) {
-            const url = `https://script.google.com/macros/s/AKfycbxyBwmjezMdNrluL8q8vlXuuSoalqhMa5errik6Dz0b2-uJyzRhL9alwUk5QQ5DGc2Y1w/exec?tagId=${tagId}`; // Replace with your Apps Script URL
+            const loader = document.querySelector('.loader');
+            const loader1 = document.querySelector('.loader1');
+    loader.style.display = 'flex';
 
-            try {
+            try { const url = `https://script.google.com/macros/s/AKfycbxyBwmjezMdNrluL8q8vlXuuSoalqhMa5errik6Dz0b2-uJyzRhL9alwUk5QQ5DGc2Y1w/exec?tagId=${tagId}`; // Replace with your Apps Script URL
                 const response = await fetch(url);
                 if (!response.ok) throw new Error("Network response was not ok");
 
@@ -297,6 +366,10 @@
                 console.error("Error fetching product data:", error);
                 document.getElementById(tagId).innerText = "Failed to load products.";
             }
+            finally {
+        loader.style.display = 'none'; 
+        loader1.style.display = 'none'; 
+    }
         }
 
         function displayProducts(products, containerId) {

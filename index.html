@@ -2,111 +2,134 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="skymart">
+    <meta name="keywords" content="e-commerce, online shopping, products, Skymart">
+    <meta name="author" content="Madhesh">
+    <title>skymart</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
-        /* Include the same styles for consistency */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            padding-bottom: 60px; /* Space for the bottom nav */
-            background-color: #f4f4f4; /* Light background color for contrast */
-        }
-        .top-nav {
-            position: fixed; /* Fixes the navbar to the top */
-    top: 0; /* Sticks to the top of the viewport */
-    left: 0;
-    width: 100%; /* Full width of the viewport */
-    background-color: #440075; /* Navbar background color */
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    z-index: 1000; 
         }
 
-        .top-nav .logo {
-            font-size: 1.5em;
-            font-weight: bold;
-            height: 60px;
-            margin-right: 20px;
-        }
-
-        .top-nav .search-bar {
-            flex-grow: 1;
+        .navbar {
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            background-color: #6402AC;
+            padding: 10px 20px;
+            .navbar {
+    position: fixed; /* Fixes the navbar to the top */
+    top: 0; /* Aligns it to the top of the page */
+    left: 0;
+    right: 0;
+    background: white; /* Background color */
+    transition: top 0.3s; /* Smooth transition for hiding/showing */
+    z-index: 1000; /* Ensure it stays above other content */
+}
+        }
+
+        .logo img {
+            height: 70px;
+            align-items: center; /* Adjust logo size */
+        }
+
+        .search-container {
+            justify-content: space-between;
             position: relative;
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; 
+            text-decoration-color: #fff;
+            align-content: center;/* Center items vertically */
         }
 
-        .top-nav input[type="text"] {
-            width: 100%;
-            padding: 8px 40px 8px 10px; /* Space for icon */
-            border: 2px solid #fff;
-            background-color: #440075;
-            border-radius: 14px;
-            font-size: 1em;
-        }
-
-        .top-nav .search-bar i {
-            position: absolute;
-            right: 10px;
+        .search-bar {
+            padding: 5px;
+            border: none;
             color: #fff;
+            background-color: #6402AC;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            display: none; 
+            text-align: center;
+    
+            -webkit-text-fill-color: #b1b1b1;
+            height:40px;/* Initially hidden */
+            width: 500px; /* Default width for desktop */
+            transition: width 0.3s ease; /* Smooth transition for width */
+        }
+
+        .toggle-button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 20px; /* Space between search icon and input */
+        }
+
+        .cart-icon  {
+            color: white;
+           /* Adjust cart icon size */
+            margin-left: 20px; /* Space between search bar and cart icon */
+            font-size: 1.5rem;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column; /* Stack elements vertically */
+                align-items: flex-start; /* Align items to the start */
+            }
+
+            .search-container {
+                width: 100%; /* Full width for search container */
+                justify-content: space-between; /* Space out search input and button */
+                /* Margin for spacing */
+            }
+            .logo {
+                margin: 0 auto; /* Center the logo */
+            }
+            
+
+            .search-bar {
+                width: 100%; /* Full width on mobile */
+                display: block; /* Keep hidden until toggled */
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 769px) {
+            .search-bar {
+                display: block;
+                align-items: center; /* Show on desktop */
+            }
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
             cursor: pointer;
         }
-        .container {
-            padding: 20px;
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 3px 7px;
+            font-size: 0.8rem;
         }
-        .banner {
-            width: 100%;
-            height: 100%;
-            padding: 0px;
-            margin-top: 80px;
-            border-radius: 0px;
-            
-        }
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #fff;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 0;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
-            border-top: 2px solid #440075;
-            transition: background-color 0.3s;
-        }
-        .nav-item {
-            text-align: center;
-            text-decoration: none;
-            color: #666;
-            padding: 10px;
-            border-radius: 10px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .nav-icon {
-            font-size: 24px;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .nav-item.active {
-            color: #440075;
-            background-color: rgba(0, 123, 255, 0.1);
-        }
-        .nav-item:hover {
-            color: #220547;
-            background-color: rgba(0, 123, 255, 0.1);
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+
+
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
@@ -123,6 +146,7 @@
 
         .main-content {
             flex: 1;
+            margin-top: 130px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -240,6 +264,7 @@
         }
         .loader {
             display: flex;
+            margin-top: 250px;
             justify-content: center; /* Center dots horizontally */
             align-items: center;
             
@@ -248,7 +273,9 @@
 
         .loader1 {
             display: flex;
-            justify-content: center; /* Center dots horizontally */
+            margin-top: 200px;
+            justify-content: center;
+            vertical-align: middle;/* Center dots horizontally */
             align-items: center;
             
             height: 50px;
@@ -291,25 +318,31 @@
        
         }
 
+
+
+
+
+        
     </style>
 </head>
 <body>
-
-    <div class="top-nav" id="top-nav">
+    <nav class="navbar" id="navbar" style="position: fixed; top: 0; left: 0; right: 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); z-index: 1000; transition: top 0.3s;">
         <div class="logo">
-            <img src="20241021_180509.png" class="logo">
+            <img src="c:\Users\admin\OneDrive\Desktop\shopit\20241021_180509.png" alt="Logo">
         </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search...">
-            <i class="fas fa-search"></i>
+        <div class="search-container">
+            <input type="search" placeholder="Search the products" id="search-bar" class="search-bar">
+            <button id="toggle-search" class="toggle-button"><i class="fas fa-search"></i></button>
+            <div class="cart-icon" onclick="viewCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-count">0</span>
+            </div>
         </div>
-    </div>
-    <img src="20241101_173943.jpg" alt="Banner Image" class="banner">
-
+    </nav>
     <main class="main-content">
         <!-- Separate divs for each category with unique IDs -->
         <section>
-            <h2>Hard Toys</h2>
+            
             <div class="loader">
                 <div class="dot"></div>
                 <div class="dot"></div>
@@ -317,42 +350,47 @@
             </div>
             <div id="hard-toys" class="product-container"></div>
         </section>
-        <img src="20241027_170719.jpg" alt="Banner Image" class="banner">
+   
 
-        <section>
-            <h2>Soft Toys</h2>
-            <div class="loader1">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-            <div id="soft-toys" class="product-container"></div>
-        </section>
-        
-    </main>
-    
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item active">
-            <i class="fas fa-home nav-icon"></i>
-            <span>Home</span>
-        </a>
-        <a href="category.html" class="nav-item" onclick="setActive(this)">
-            <i class="fas fa-th-list nav-icon"></i>
-            <span>Category</span>
-        </a>
-        <a href="cart.html" class="nav-item" onclick="setActive(this)">
-            <i class="fas fa-shopping-cart nav-icon"></i>
-            <span>Cart</span>
-        </a>
-    </nav>
-    
     <script>
-        async function fetchProducts(tagId) {
+
+
+let lastScrollTop = 0;
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (scrollTop > lastScrollTop) {
+        // Scrolling down
+        navbar.style.top = "-70px"; // Adjust this value according to your navbar height
+    } else {
+        // Scrolling up
+        navbar.style.top = "0";
+    }
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+});
+
+
+
+        document.getElementById('toggle-search').addEventListener('click', function() {
+            const searchBar = document.getElementById('search-bar');
+            if (searchBar.style.display === 'none' || searchBar.style.display === '') {
+                searchBar.style.display = 'block'; // Show the search bar
+                searchBar.focus(); // Focus on the search bar
+            } else {
+                searchBar.style.display = 'none'; // Hide the search bar
+            }
+        });
+
+
+
+         async function fetchProducts(tagId) {
             const loader = document.querySelector('.loader');
-            const loader1 = document.querySelector('.loader1');
     loader.style.display = 'flex';
 
-            try { const url = `https://script.google.com/macros/s/AKfycbxyBwmjezMdNrluL8q8vlXuuSoalqhMa5errik6Dz0b2-uJyzRhL9alwUk5QQ5DGc2Y1w/exec?tagId=${tagId}`; // Replace with your Apps Script URL
+    
+try { const url = `https://script.google.com/macros/s/AKfycbxyBwmjezMdNrluL8q8vlXuuSoalqhMa5errik6Dz0b2-uJyzRhL9alwUk5QQ5DGc2Y1w/exec?tagId=${tagId}`; // Replace with your Apps Script URL
                 const response = await fetch(url);
                 if (!response.ok) throw new Error("Network response was not ok");
 
@@ -367,9 +405,17 @@
                 document.getElementById(tagId).innerText = "Failed to load products.";
             }
             finally {
-        loader.style.display = 'none'; 
-        loader1.style.display = 'none'; 
+        loader.style.display = 'none';  
     }
+        }
+
+        let products = []; // Store fetched products here
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+
+        function updateCartCount() {
+            const cartCountElement = document.getElementById('cart-count');
+            cartCountElement.innerText = cart.length; // Update the count
         }
 
         function displayProducts(products, containerId) {
@@ -391,22 +437,43 @@
                             <span class="product-price">₹${product.discountPrice}</span>
                             <span class="discounted-price">₹${product.actualPrice}</span>
                         </div>
-                        <a href="#" class="add-to-cart" onclick="addToCart('${product.productID}')">Add to Cart</a>
-                    </div>
+<button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, '${product.imageUrl}', '${product.description}')">Add to Cart</button>                    </div>
                 `;
                 container.appendChild(productDiv);
             });
+            updateCartCount();
+            
+        } function viewCart() {
+            window.location.href = 'viewcart.html'; // Redirect to viewcart.html
         }
+        
 
-        function addToCart(productID) {
-            console.log(`Product ${productID} added to cart`);
-            alert(`Product ${productID} added to cart`);
-        }
+        function addToCart(name, price, imageUrl, description) {
+    const item = { name, price, imageUrl, description }; // Include imageUrl and description
+    cart.push(item); // Add item to cart
+    localStorage.setItem('cart', JSON.stringify(cart)); // Save cart to localStorage
+    updateCartCount(); // Update cart count in navbar
+}
 
+        const searchInput = document.getElementById('search-bar');
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            const filteredProducts = products.filter(product => {
+                return (
+                    product.name.toLowerCase().includes(query) ||
+                    product.price.toString().includes(query) ||
+                    product.description.toLowerCase().includes(query)
+                );
+            });
+            displayProducts(filteredProducts);
+        });
         // Fetch products for each category
         fetchProducts('hard-toys'); // Load hard toys
-        fetchProducts('soft-toys'); // Load soft toys
-        // Add more calls here for additional categories as needed
+
+
+
     </script>
 </body>
 </html>
+
+

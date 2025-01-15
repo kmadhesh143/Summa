@@ -6,7 +6,11 @@
     <meta name="description" content="ShopIt - Your go-to online store for all your needs">
     <meta name="keywords" content="e-commerce, online shopping, products, ShopIt">
     <meta name="author" content="Madhesh">
-    <title>Shoplon</title>
+    <meta name="theme-color" content="#6402AC">
+    <meta name="msapplication-navbutton-color" content="#6402AC">
+
+    <title>ShopIt</title>
+    <link rel="icon" type="image/png" href="c:\Users\admin\OneDrive\Desktop\shopit\20250115_182735.jpg">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -72,12 +76,31 @@
     
             /* Default size for mobile */
     }
+    .search-bar::placeholder {
+    color: #bebebe; /* Matches your design's white color theme */
+    opacity: 1;
+}
 
     .cart-icon {
       font-size: 22px;
       cursor: pointer;
       color: #fff;
     }
+
+    .cart-count {
+      position: absolute;
+    top: 5px; /* Adjust to move the badge vertically */
+    right: 5px; /* Adjust to move the badge horizontally */
+    background-color: #ff5733; /* Background color of the badge */
+    color: white; /* Text color for visibility */
+    padding: 2px 6px; /* Padding for badge size */
+    border-radius: 50%; /* Makes it circular */
+    font-size: 12px; /* Text size */
+    font-weight: bold; /* Bold text */
+    min-width: 18px; /* Ensures consistent size for single digits */
+    text-align: center; /* Centers text inside the badge */
+    line-height: 1.5; /* Ens /* Centers the text */
+}
 
     /* Focus Styling for Search Bar */
     .search-bar:focus {
@@ -167,6 +190,20 @@
     font-size: 24px;
     color: #fff;
   }
+  .cart-count {
+      position: absolute;
+    top: 60px; /* Adjust to move the badge vertically */
+    right: 15px; /* Adjust to move the badge horizontally */
+    background-color: #ff5733; /* Background color of the badge */
+    color: white; /* Text color for visibility */
+    padding: 2px 6px; /* Padding for badge size */
+    border-radius: 50%; /* Makes it circular */
+    font-size: 12px; /* Text size */
+    font-weight: bold; /* Bold text */
+    min-width: 18px; /* Ensures consistent size for single digits */
+    text-align: center; /* Centers text inside the badge */
+    line-height: 1.5; /* Ens /* Centers the text */
+}
 }
 
 
@@ -189,7 +226,7 @@
       flex-wrap: wrap;
       justify-content: space-around;
       gap: 20px;
-      margin-top: 20px;
+      margin-top: 0px;
     }
 
     .product-card {
@@ -312,18 +349,40 @@
     </style>
 </head>
 <body>
+ 
     <nav class="navbar" id="navbar" style="position: fixed; top: 0; left: 0; right: 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); z-index: 1000; transition: top 0.3s;">
-        <div class="logo">
-            <img src="c:\Users\admin\OneDrive\Desktop\shopit\20241021_180509.png" alt="Logo">
+      <div class="left-section">
+        <div class="menu-icon" id="menu-icon">
+          <i class="fas fa-bars"></i>
         </div>
-        <div class="search-container">
-            <input type="search" placeholder="Search..." id="search-bar" class="search-bar">
-            <button id="toggle-search" class="toggle-button"><i class="fas fa-search"></i></button>
+        <div class="logo">
+          <a href="#">
+            <img src="c:\Users\admin\OneDrive\Desktop\shopit\20250115_200615.png" alt="Logo"> <!-- Replace with your logo image path -->
+          </a>
+        </div>
+      </div>
+        <div class="nav-icons">
+            <input type="search" placeholder="Search the product " id="search-bar" class="search-bar">
             <div class="cart-icon" onclick="viewCart()">
                 <i class="fas fa-shopping-cart"></i>
                 <span id="cart-count" class="cart-count">0</span>
             </div>
+       
         </div>
+        <div class="menu" id="menu">
+          <img src="c:\Users\admin\OneDrive\Desktop\shopit\20250115_175634.jpg" alt="Menu Image" class="menu-image">
+          <a href="#">Home</a>
+          <a href="#">Shop</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </div>
+
+        <div id="loader" class="dot-loader">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+
     </nav>
     <main style="padding-top: 80px; margin-top: 100px; height: 200vh; text-align: center;">
         <div id="product-container" class="product-container"></div>
@@ -331,6 +390,31 @@
     </main>
 
     <script>
+
+const menuIcon = document.getElementById('menu-icon');
+const menu = document.getElementById('menu');
+const menuLinks = menu.querySelectorAll('a'); // Select all menu links
+
+// Function to toggle menu visibility
+menuIcon.addEventListener('click', (event) => {
+  event.stopPropagation(); // Prevent the event from reaching the document
+  const currentLeft = menu.style.left;
+  menu.style.left = currentLeft === '0px' ? '-250px' : '0px';
+});
+
+// Close the menu when clicking outside of it
+document.addEventListener('click', (event) => {
+  if (menu.style.left === '0px' && !menu.contains(event.target)) {
+    menu.style.left = '-250px'; // Close the menu
+  }
+});
+
+// Close the menu when clicking on a menu link
+menuLinks.forEach((link) => {
+  link.addEventListener('click', () => {
+    menu.style.left = '-250px'; // Close the menu
+  });
+});
 
 let lastScrollTop = 0;
 const navbar = document.getElementById("navbar");
@@ -340,7 +424,7 @@ window.addEventListener("scroll", function() {
 
     if (scrollTop > lastScrollTop) {
         // Scrolling down
-        navbar.style.top = "-70px"; // Adjust this value according to your navbar height
+        navbar.style.top = "-50px"; // Adjust this value according to your navbar height
     } else {
         // Scrolling up
         navbar.style.top = "0";
@@ -348,23 +432,16 @@ window.addEventListener("scroll", function() {
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
 });
 
-
-
-        document.getElementById('toggle-search').addEventListener('click', function() {
-            const searchBar = document.getElementById('search-bar');
-            if (searchBar.style.display === 'none' || searchBar.style.display === '') {
-                searchBar.style.display = 'block'; // Show the search bar
-                searchBar.focus(); // Focus on the search bar
-            } else {
-                searchBar.style.display = 'none'; // Hide the search bar
-            }
-        });
+const loader = document.getElementById('loader');
+      loader.style.display = 'flex';
 
         const googleSheetURL = 'https://script.google.com/macros/s/AKfycbxiCV-nplP56tFGFSRGBevYfvxhtCDh1Ac2bNpZq1WpMuhk_UkY6VOyfSlMqWde5YOt/exec'; 
 
         let products = []; // Store fetched products here
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+
+     // Shows the badge with value 1
 
         function updateCartCount() {
             const cartCountElement = document.getElementById('cart-count');
@@ -404,6 +481,7 @@ window.addEventListener("scroll", function() {
             `;
             productContainer.innerHTML += productCard;
         });
+        loader.style.display = 'none';
     }
     updateCartCount();
 }

@@ -3,320 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="skymart">
-    <meta name="keywords" content="e-commerce, online shopping, products, Skymart">
+    <meta name="description" content="ShopIt - Your go-to online store for all your needs">
+    <meta name="keywords" content="e-commerce, online shopping, products, ShopIt">
     <meta name="author" content="Madhesh">
-    <title>skymart</title>
+    <title>Shoplon</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #6402AC;
-            padding: 10px 20px;
-            .navbar {
-    position: fixed; /* Fixes the navbar to the top */
-    top: 0; /* Aligns it to the top of the page */
-    left: 0;
-    right: 0;
-    background: white; /* Background color */
-    transition: top 0.3s; /* Smooth transition for hiding/showing */
-    z-index: 1000; /* Ensure it stays above other content */
-}
-        }
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #6402AC;
+      color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
 
-        .logo img {
-            height: 70px;
-            align-items: center; /* Adjust logo size */
-        }
+    /* Left Section (Menu Icon and Logo) */
+    .left-section {
+      display: flex;
+      align-items: center;
+    }
 
-        .search-container {
-            justify-content: space-between;
-            position: relative;
-            display: flex; /* Use flexbox for alignment */
-            align-items: center; 
-            text-decoration-color: #fff;
-            align-content: center;/* Center items vertically */
-        }
+    .menu-icon {
+      font-size: 24px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
 
-        .search-bar {
-            padding: 5px;
+    .menu-icon i {
+      color: #fff;
+    }
+
+    .logo img {
+      height: 30px; /* Adjust the size of the logo */
+      width: auto;
+    }
+
+    /* Right Section (Search Bar and Cart Icon) */
+    .nav-icons {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-bar {
+        padding: 7px;
+        width: 400px;
+        justify-content: center;
             border: none;
             color: #fff;
-            background-color: #6402AC;
+            background-color:#6402AC;
             border: 2px solid #fff;
-            border-radius: 20px;
-            display: none; 
+            border-radius: 10px;
+        margin-right: 10px;
+   print-color-adjust: #fff;
             text-align: center;
     
-            -webkit-text-fill-color: #b1b1b1;
-            height:40px;/* Initially hidden */
-            width: 500px; /* Default width for desktop */
-            transition: width 0.3s ease; /* Smooth transition for width */
-        }
-
-        .toggle-button {
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            margin-left: 20px; /* Space between search icon and input */
-        }
-
-        .cart-icon  {
-            color: white;
-           /* Adjust cart icon size */
-            margin-left: 20px; /* Space between search bar and cart icon */
-            font-size: 1.5rem;
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column; /* Stack elements vertically */
-                align-items: flex-start; /* Align items to the start */
-            }
-
-            .search-container {
-                width: 100%; /* Full width for search container */
-                justify-content: space-between; /* Space out search input and button */
-                /* Margin for spacing */
-            }
-            .logo {
-                margin: 0 auto; /* Center the logo */
-            }
-            
-
-            .search-bar {
-                width: 100%; /* Full width on mobile */
-                display: block; /* Keep hidden until toggled */
-            }
-        }
-
-        /* Desktop Styles */
-        @media (min-width: 769px) {
-            .search-bar {
-                display: block;
-                align-items: center; /* Show on desktop */
-            }
-        }
-
-        .cart-icon {
-            position: relative;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -10px;
-            background-color: red;
-            color: white;
-            border-radius: 50%;
-            padding: 3px 7px;
-            font-size: 0.8rem;
-        }
-
-
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            text-align: center;
-            padding: 20px;
-            font-size: 2rem;
-        }
-
-        .main-content {
-            flex: 1;
-            margin-top: 130px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        /* Container styling */
-        .product-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-/* Adjust grid layout for mobile view */
-@media (max-width: 768px) {
-    .product-container {
-        grid-template-columns: repeat(2, 1fr); /* 3 items per row on mobile */
-        gap: 10px; /* Smaller gap for mobile */
+            /* Default size for mobile */
     }
+
+    .cart-icon {
+      font-size: 22px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    /* Focus Styling for Search Bar */
+    .search-bar:focus {
+      outline: 2px solid #555;
+    }
+
+    /* Sliding Menu Styles */
+    .menu {
+      position: fixed;
+      top: 0;
+      left: -250px; /* Initially hidden off-screen */
+      height: 100%;
+      width: 250px;
+      background-color: #6402AC;
+      overflow-x: hidden;
+      transition: left 0.3s ease; /* Smooth slide-in effect */
+      padding-top: 60px; /* Adjust for fixed navbar height */
+    }
+    /* Styling for the image in the sliding menu */
+.menu-image {
+  width: 100%; /* Adjust to the menu's width */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 20px; /* Add some spacing below the image */
 }
 
-        /* Product card styling */
-        .product-card {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
 
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 15px;
+      font-size: 18px;
+    }
 
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-            background-color: #f3f3f3;
-            transition: opacity 0.3s ease;
-        }
+    .menu a:hover {
+      background-color: #cecece;
+    }
 
-        .product-info {
-            padding: 15px;
-            text-align: center;
-        }
+    /* Mobile view adjustments */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center the logo */
+    padding: 10px; /* Add padding */
+  }
 
-        .product-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 8px;
-        }
+  .left-section {
+    width: 100%; /* Take full width for layout adjustments */
+    display: flex;
+    justify-content: center; /* Center the logo */
+    position: relative; /* To position the menu icon */
+    margin-bottom: 10px; /* Add spacing below the logo */
+  }
 
-        .product-description {
-            font-size: 0.9rem;
-            color: #777;
-            margin: 5px 0 12px;
-            line-height: 1.5;
-        }
+  .menu-icon {
+    position: absolute; /* Position it relative to the parent */
+    left: 10px; /* Align the menu icon to the left */
+    top: 50%; /* Vertically align with the logo */
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #fff;
+  }
 
-        .price-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-        }
+  .logo img {
+    height: 40px; /* Adjust logo size */
+    width: auto;
+  }
 
-        .product-price {
-            font-size: 1.1rem;
-            color: #333;
-            font-weight: 600;
-        }
+  .nav-icons {
+    display: flex; /* Align search bar and cart icon in a row */
+    align-items: center; /* Vertically center elements */
+    justify-content: space-between; /* Add spacing between elements */
+    width: 90%; /* Adjust width to fit the screen */
+  }
 
-        .discounted-price {
-            color: #f44336;
-            text-decoration: line-through;
-            font-size: 0.9rem;
-        }
+  .search-bar {
+    flex: 1; /* Allow the search bar to take available space */
+    margin-right: 20px; /* Add spacing before the cart icon */
+    border-radius: 10px;
+    border: 2px solid #fff;
+    padding: 7px;
+    background-color: #6402AC;
+    color: #fff;
+  }
 
-        .offer-percentage {
-            background: #4CAF50;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
+  .cart-icon {
+    font-size: 24px;
+    color: #fff;
+  }
+}
 
-        .add-to-cart {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 15px;
-            background-color: #fff;
-            color: #440075;
-            border: 2px solid #220547;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s ease;
-            font-weight: 600;
-        }
 
-        .add-to-cart:hover {
-            background-color: #440075;
-            color: #fff;
-        }
-        .loader {
-            display: flex;
-            margin-top: 250px;
-            justify-content: center; /* Center dots horizontally */
-            align-items: center;
-            
-            height: 50px;
-        }
 
-        .loader1 {
-            display: flex;
-            margin-top: 200px;
-            justify-content: center;
-            vertical-align: middle;/* Center dots horizontally */
-            align-items: center;
-            
-            height: 50px;
-        }
-        /* Dot styles */
-        .dot {
-            width: 15px; /* Dot size */
-            height: 15px;
-            border-radius: 50%;
-            background-color: #220547; /* Dot color */
-            animation: bounce 0.6s infinite alternate;
-        }
 
-        /* Delay for each dot */
-        .dot:nth-child(1) {
-            animation-delay: 0s;
-            margin: 10px;
-        }
+    /* Desktop screens */
+    @media (min-width: 1024px) {
+      .search-bar {
+        width: 800px; 
+        align-self: center;
+        align-items: center;
+        margin-right: 400px;/* For desktops */
+      }
+    }
 
-        .dot:nth-child(2) {
-            animation-delay: 0.2s;
-            margin: 10px;
-        }
 
-        .dot:nth-child(3) {
-            animation-delay: 0.4s;
-            margin: 10px;
-        }
 
-        /* Bounce animation */
-        @keyframes bounce {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(-15px); /* Bounce height */
-            }
-          
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 20px;
+      margin-top: 20px;
+    }
 
-       
-        }
+    .product-card {
+      width: 250px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+
+    .product-image {
+      width: 85%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-details {
+      padding: 15px;
+    }
+
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .product-price {
+      font-size: 16px;
+      color: #6402AC;
+      margin-top: 10px;
+    }
+
+    .product-description {
+      font-size: 14px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    .add-to-cart {
+      background-color: #6402AC;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .add-to-cart:hover {
+      background-color: #5401a3;
+    }
+    @media screen and (max-width: 768px) {
+  .product-card {
+    width: 45%; /* Two products per row */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .product-card {
+    width: 90%; /* One product per row on very small screens */
+  }
+}
+
+
+.dot-loader {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: #6402AC;
+      border-radius: 50%;
+      animation: dot-animation 1.5s infinite ease-in-out;
+    }
+
+    .dot:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .dot:nth-child(2) {
+      animation-delay: 0.4s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.8s;
+    }
+    
+
+    /* Animation for dots */
+    @keyframes dot-animation {
+      0%, 100% {
+        transform: scale(0);
+      }
+      
+      30% {
+        transform: scale(2);
+      }
+     
+    }
 
 
 
@@ -328,10 +314,10 @@
 <body>
     <nav class="navbar" id="navbar" style="position: fixed; top: 0; left: 0; right: 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); z-index: 1000; transition: top 0.3s;">
         <div class="logo">
-            <img src="20241021_180509.png" alt="Logo">
+            <img src="c:\Users\admin\OneDrive\Desktop\shopit\20241021_180509.png" alt="Logo">
         </div>
         <div class="search-container">
-            <input type="search" placeholder="Search the products" id="search-bar" class="search-bar">
+            <input type="search" placeholder="Search..." id="search-bar" class="search-bar">
             <button id="toggle-search" class="toggle-button"><i class="fas fa-search"></i></button>
             <div class="cart-icon" onclick="viewCart()">
                 <i class="fas fa-shopping-cart"></i>
@@ -339,21 +325,12 @@
             </div>
         </div>
     </nav>
-    <main class="main-content">
-        <!-- Separate divs for each category with unique IDs -->
-        <section>
-            
-            <div class="loader">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-            <div id="hard-toys" class="product-container"></div>
-        </section>
-   
+    <main style="padding-top: 80px; margin-top: 100px; height: 200vh; text-align: center;">
+        <div id="product-container" class="product-container"></div>
+        <div id="not-found" class="not-found" style="display:none;">No products found.</div> <!-- Page content goes here -->
+    </main>
 
     <script>
-
 
 let lastScrollTop = 0;
 const navbar = document.getElementById("navbar");
@@ -383,31 +360,7 @@ window.addEventListener("scroll", function() {
             }
         });
 
-
-
-         async function fetchProducts(tagId) {
-            const loader = document.querySelector('.loader');
-    loader.style.display = 'flex';
-
-    
-try { const url = `https://script.google.com/macros/s/AKfycbxyBwmjezMdNrluL8q8vlXuuSoalqhMa5errik6Dz0b2-uJyzRhL9alwUk5QQ5DGc2Y1w/exec?tagId=${tagId}`; // Replace with your Apps Script URL
-                const response = await fetch(url);
-                if (!response.ok) throw new Error("Network response was not ok");
-
-                const products = await response.json();
-                if (products.error) {
-                    document.getElementById(tagId).innerText = products.error;
-                } else {
-                    displayProducts(products, tagId);
-                }
-            } catch (error) {
-                console.error("Error fetching product data:", error);
-                document.getElementById(tagId).innerText = "Failed to load products.";
-            }
-            finally {
-        loader.style.display = 'none';  
-    }
-        }
+        const googleSheetURL = 'https://script.google.com/macros/s/AKfycbxiCV-nplP56tFGFSRGBevYfvxhtCDh1Ac2bNpZq1WpMuhk_UkY6VOyfSlMqWde5YOt/exec'; 
 
         let products = []; // Store fetched products here
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -418,35 +371,43 @@ try { const url = `https://script.google.com/macros/s/AKfycbxyBwmjezMdNrluL8q8vl
             cartCountElement.innerText = cart.length; // Update the count
         }
 
-        function displayProducts(products, containerId) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = ''; // Clear existing content
-            
+        // Fetch products from Google Sheets
+        fetch(googleSheetURL)
+            .then(response => response.json())
+            .then(data => {
+                products = data; // Store products in the global variable
+                displayProducts(products); // Initially display all products
+            })
+            .catch(error => console.log('Error fetching data:', error));
 
-            products.forEach(product => {
-                const productDiv = document.createElement('div');
-                productDiv.classList.add('product-card');
-                const offerPercentage = Math.round(((product.actualPrice - product.discountPrice) / product.actualPrice) * 100);
-                productDiv.innerHTML = `
-                    <div class="offer-percentage">${offerPercentage}% OFF</div>
-                    <img src="${product.imageURL}" alt="${product.name}" class="product-image">
-                    <div class="product-info">
-                        <div class="product-title">${product.name}</div>
-                        <p class="product-description">${product.description}</p>
-                        <div class="price-info">
-                            <span class="product-price">₹${product.discountPrice}</span>
-                            <span class="discounted-price">₹${product.actualPrice}</span>
-                        </div>
-<button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, '${product.imageUrl}', '${product.description}')">Add to Cart</button>                    </div>
-                `;
-                container.appendChild(productDiv);
-            });
-            updateCartCount();
-            
-        } function viewCart() {
-            window.location.href = 'viewcart.html'; // Redirect to viewcart.html
-        }
-        
+        function displayProducts(productList) {
+    const productContainer = document.getElementById('product-container');
+    const notFoundMessage = document.getElementById('not-found');
+    productContainer.innerHTML = ''; // Clear previous products
+
+    if (productList.length === 0) {
+        notFoundMessage.style.display = 'block'; // Show "not found" message
+    } else {
+        notFoundMessage.style.display = 'none'; // Hide "not found" message
+        productList.forEach(product => {
+            const productCard = `
+                <div class="product-card">
+                    <img src="${product.img}" alt="${product.name}" class="product-image">
+          <div class="product-details">
+            <div class="product-name">${product.name}</div>
+            <div class="product-price">₹${product.discount}</div>
+            <div class="product-description">${product.description}</div>
+            <button class="add-to-cart" onclick="addToCart('${product.id}', '${product.name}', ${product.discount})">
+              Add to Cart
+            </button>
+          </div>
+            `;
+            productContainer.innerHTML += productCard;
+        });
+    }
+    updateCartCount();
+}
+
 
         function addToCart(name, price, imageUrl, description) {
     const item = { name, price, imageUrl, description }; // Include imageUrl and description
@@ -455,6 +416,15 @@ try { const url = `https://script.google.com/macros/s/AKfycbxyBwmjezMdNrluL8q8vl
     updateCartCount(); // Update cart count in navbar
 }
 
+
+
+
+
+        function viewCart() {
+    window.location.href = 'viewcart.html'; // Redirect to viewcart.html
+}
+
+        // Search functionality
         const searchInput = document.getElementById('search-bar');
         searchInput.addEventListener('input', () => {
             const query = searchInput.value.toLowerCase();
@@ -467,13 +437,8 @@ try { const url = `https://script.google.com/macros/s/AKfycbxyBwmjezMdNrluL8q8vl
             });
             displayProducts(filteredProducts);
         });
-        // Fetch products for each category
-        fetchProducts('hard-toys'); // Load hard toys
-
-
 
     </script>
 </body>
 </html>
-
 
